@@ -1,0 +1,39 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center bg-gray-800 p-4 mb-6 text-white">
+    <h1 class="text-xl font-bold">Mini-Blog</h1>
+    <div>
+      <% if current_user %>
+        <span class="mr-4">Welcome, <%= current_user.email %>!</span>
+        <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: "text-red-500 hover:underline" %>
+      <% else %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2" %>
+        <%= link_to 'Sign In', new_user_session_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+      <% end %>
+    </div>
+  </nav>
+
+  <h1 class="text-3xl font-bold mb-6">Posts</h1>
+
+  <% cache 'posts_list' do %>
+    <!-- Form for creating a new post -->
+    <div id="new_post" class="mb-6 bg-white p-6 rounded-lg shadow-lg">
+      <%= form_with(model: Post.new, local: false) do |form| %>
+        <div class="mb-4">
+          <%= form.label :title, class: "block text-gray-700" %>
+          <%= form.text_field :title, class: "mt-1 block w-full p-2 border rounded" %>
+        </div>
+        <div class="mb-4">
+          <%= form.label :body, class: "block text-gray-700" %>
+          <%= form.text_area :body, class: "mt-1 block w-full p-2 border rounded" %>
+        </div>
+        <%= form.submit 'Create Post', class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Posts List -->
+  <div id="posts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <%= render @posts %>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<h2>Add a Comment</h2>
+<%= form_with(model: [post, Comment.new]) do |form| %>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
+<% end %>
