@@ -20,20 +20,18 @@
     <div id="new_post" class="mb-6 bg-white p-6 rounded-lg shadow-lg">
       <%= form_with(model: Post.new, local: false) do |form| %>
         <div class="mb-4">
-          <%= form.label :title, class: "block text-gray-700" %>
-          <%= form.text_field :title, class: "mt-1 block w-full p-2 border rounded" %>
+          <%= form.text_field :title, placeholder: "What's happening?", class: "mt-1 block w-full p-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" %>
         </div>
         <div class="mb-4">
-          <%= form.label :body, class: "block text-gray-700" %>
-          <%= form.text_area :body, class: "mt-1 block w-full p-2 border rounded" %>
+          <%= form.text_area :body, placeholder: "Enter your thoughts...", rows: 3, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
         </div>
-        <%= form.submit 'Create Post', class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+        <%= form.submit 'Create Post', class: "bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
       <% end %>
     </div>
   <% end %>
 
   <!-- Posts List -->
-  <div id="posts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div id="posts" class="space-y-6">
     <%= render @posts %>
   </div>
 </div>
