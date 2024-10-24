@@ -1,8 +1,4 @@
-<div class="comment">
-  <p><%= comment.body %></p>
-  <p>By <%= comment.user.email %></p>
-  <% if comment.user == current_user %>
-    <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-secondary' %>
-    <%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-  <% end %>
+<div class="comment bg-gray-100 p-4 rounded-lg mt-2">
+  <p class="text-gray-800"><%= comment.body %></p>
+  <p class="text-sm text-gray-500">By <%= comment.user.email %></p>
 </div>

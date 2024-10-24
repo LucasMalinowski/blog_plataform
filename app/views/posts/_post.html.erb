@@ -10,7 +10,27 @@
     <div class="flex space-x-4">
       <%= link_to 'Show', post_path(post), class: "text-blue-500 hover:underline" %>
       <%= link_to 'Edit', edit_post_path(post), class: "text-green-500 hover:underline" %>
-      <%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:underline" %>
+      <%= button_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:underline" %>
+    </div>
+  </div>
+
+  <div data-controller="comments" class="mt-6">
+    <button data-action="click->comments#toggleComments" class="text-blue-500 hover:underline">
+      View Comments (<%= post.comments.count %>)
+    </button>
+
+    <div data-comments-target="commentsList" class="hidden mt-4">
+      <% post.comments.each do |comment| %>
+        <%= render partial: "comments/comment", locals: { comment: comment } %>
+      <% end %>
+    </div>
+
+    <button data-action="click->comments#toggleForm" class="text-green-500 hover:underline mt-4">
+      Add a Comment
+    </button>
+
+    <div data-comments-target="commentForm" class="hidden mt-4">
+      <%= render "comments/form", post: post %>
     </div>
   </div>
 </div>
