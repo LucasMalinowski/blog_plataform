@@ -81,3 +81,7 @@ end
 gem "sidekiq", "~> 7.3"
 
 gem "pg_search", "~> 2.3"
+
+gem "devise_token_auth", "~> 1.2"
+
+gem "omniauth", "~> 2.1"
