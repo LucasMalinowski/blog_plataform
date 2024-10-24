@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.all
+    @posts = if params[:query].present?
+               Post.search_by_title_and_body_and_user_name(params[:query])
+             else
+               Post.all
+             end
   end
 
   def create

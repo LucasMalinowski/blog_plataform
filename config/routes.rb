@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "posts#index"
+  get 'search', to: 'posts#search', as: 'search_posts'
+
 
   resources :posts do
     resources :comments, only: [:create, :edit, :update, :destroy]
