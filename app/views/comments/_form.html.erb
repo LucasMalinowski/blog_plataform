@@ -1,12 +1,19 @@
 <div class="mt-4">
-  <h2 class="text-lg font-semibold">Add a Comment</h2>
-  <%= form_with(model: [post, Comment.new], local: true) do |form| %>
-    <div>
-      <%= form.label :body, class: "block text-sm font-medium text-gray-700" %>
-      <%= form.text_area :body, rows: 3, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-    </div>
-    <div class="mt-4">
-      <%= form.submit 'Add Comment', class: "btn btn-primary bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" %>
-    </div>
+  <% if current_user %>
+    <% comment ||= Comment.new %>
+    <%= form_with(model: [post, comment], local: true) do |form| %>
+      <div>
+        <%= form.markdown_field :body, rows: 3, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+      <div class="mt-4">
+        <%= form.submit 'Add Comment', class: "btn btn-primary bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" %>
+        <span data-action="click->comments#toggleForm" class="top-2 right-2 text-gray-500 hover:text-gray-700">
+          <i class="fas  text-red-500 fa-trash"></i>
+        </span>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-gray-500">Please <%= link_to 'sign in', new_user_session_path, class: "underline" %> to add a comment.</p>
   <% end %>
+
 </div>

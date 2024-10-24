@@ -1,13 +1,9 @@
-<div id="new_post" class="mb-6">
-  <%= form_with(model: post, local: false) do |form| %>
-    <div class="mb-4">
-      <%= form.label :title, class: "block text-gray-700" %>
-      <%= form.text_field :title, class: "mt-1 block w-full p-2 border rounded" %>
-    </div>
-    <div class="mb-4">
-      <%= form.label :body, class: "block text-gray-700" %>
-      <%= form.text_area :body, class: "mt-1 block w-full p-2 border rounded" %>
-    </div>
-    <%= form.submit 'Create Post', class: "bg-blue-500 text-white px-4 py-2 rounded" %>
-  <% end %>
-</div>
+<%= form_with(model: post, local: false) do |form| %>
+  <div class="mb-4">
+    <%= form.text_field :title, placeholder: "What's happening?", class: "mt-1 block w-full p-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+  <div class="mb-4">
+    <%= form.markdown_field :body, placeholder: "Enter your thoughts...", rows: 3, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+  <%= form.submit post.new_record? ? 'Create Post' : 'Update Post', class: "bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
+<% end %>

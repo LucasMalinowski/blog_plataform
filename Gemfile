@@ -32,6 +32,8 @@ gem "tailwindcss-rails"
 
 gem 'dotenv'
 
+gem "action_markdown"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -77,3 +79,5 @@ group :test do
 end
 
 gem "sidekiq", "~> 7.3"
+
+gem "pg_search", "~> 2.3"
