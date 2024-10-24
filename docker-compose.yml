@@ -18,6 +18,23 @@ services:
     depends_on:
       - db
     tty: true
+    environment:
+      REDIS_URL: redis://redis:6379
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/my_app
+    depends_on:
+      - db
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379
+
 
 volumes:
   postgres_data:

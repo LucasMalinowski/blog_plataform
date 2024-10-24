@@ -11,8 +11,5 @@ export default class extends Controller {
   toggleForm() {
     this.commentFormTarget.classList.toggle("hidden");
 
-    if (!this.commentFormTarget.classList.contains("hidden")) {
-      this.commentFormTarget.scrollIntoView({ behavior: 'smooth' });
-    }
   }
 }
