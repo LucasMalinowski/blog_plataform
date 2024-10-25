@@ -4,19 +4,32 @@
   </div>
   <div id="post_<%=post.id%>_info" class="flex items-start space-x-4">
     <div class="flex-1">
-      <h2 class="text-lg font-semibold text-gray-900"><%= post.title %></h2>
+      <h2 class="text-lg font-semibold text-gray-900">
+        <%= post.title %>
+        <%= link_to post_path(post) do %>
+          <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i>
+        <% end %>
+      </h2>
+      <span>
+        <div class="" data-controller="gallery">
+          <% post.images.each do |image| %>
+            <div class="" data-action="click->gallery#displayImage">
+              <%= image_tag image.variant(resize_to_limit: [100, 100]), class: "thumbnail", data: {gallery_target: "thumbnail"} %>
+            </div>
+            <div data-gallery-target="modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+              <div class="relative">
+                <img data-gallery-target="largeImage" style="width: 500px; height: 500px" />
+                <button class="absolute top-0 right-0 text-white text-xl" data-action="click->gallery#closeModal">✕</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </span>
       <p class="text-gray-600 mt-2"><%= post.body %></p>
-      <p class="text-gray-500 text-sm mt-2">By <%= post.user.email %></p>
+      <p class="text-gray-500 text-sm mt-2">By <%= post.user.name %></p>
+      <p class="text-gray-500 text-xs mt-2">Posted <%= post.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
     </div>
   </div>
-  <% if current_user == post.user %>
-    <div class="flex justify-between items-center mt-4">
-      <div class="flex space-x-4">
-        <%= link_to 'Edit', edit_post_path(post), data: { turbo_stream: true, turbo_frame: "edit_post" }, class: "text-green-500 hover:underline" %>
-        <%= button_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:underline" %>
-      </div>
-    </div>
-  <% end %>
 
   <div data-controller="comments" class="mt-6">
     <button data-action="click->comments#toggleComments" class="text-blue-500 hover:underline">

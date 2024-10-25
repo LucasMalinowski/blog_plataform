@@ -6,9 +6,5 @@ export default class extends Controller {
 
   toggleForm() {
     this.postFormTarget.classList.toggle("hidden");
-
-    if (!this.postFormTarget.classList.contains("hidden")) {
-      this.postFormTarget.scrollIntoView({ behavior: 'smooth' });
-    }
   }
 }

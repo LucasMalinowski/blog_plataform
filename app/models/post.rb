@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   include PgSearch::Model
 
   has_markdown :body
-  has_one_attached :image
+  has_many_attached :images
 
   belongs_to :user
   has_many :comments, dependent: :destroy

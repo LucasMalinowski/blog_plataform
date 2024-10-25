@@ -10,6 +10,5 @@ export default class extends Controller {
 
   toggleForm() {
     this.commentFormTarget.classList.toggle("hidden");
-
   }
 }

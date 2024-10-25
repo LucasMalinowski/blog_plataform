@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   protect_from_forgery with: :exception
 
   # Skip CSRF protection for API requests

@@ -3,10 +3,16 @@ class PostsController < ApplicationController
 
   def index
     @posts = if params[:query].present?
-               Post.search_by_title_and_body_and_user_name(params[:query])
+               Post.includes(:comments, :user)
+                   .search_by_title_and_body_and_user_name(sanitize_sql(params[:query]))
+                   .page(params[:page]).per(5)
              else
-               Post.all
+               Post.includes(:comments, :user)
+                   .all.page(params[:page]).per(5)
              end
+  end
+
+  def show
   end
 
   def create
@@ -57,6 +63,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :images)
   end
 end

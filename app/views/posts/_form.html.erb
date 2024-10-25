@@ -5,5 +5,8 @@
   <div class="mb-4">
     <%= form.markdown_field :body, placeholder: "Enter your thoughts...", rows: 3, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
+  <div class="mb-4">
+    <%= form.file_field :images, class: "mt-1 block w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
   <%= form.submit post.new_record? ? 'Create Post' : 'Update Post', class: "bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
 <% end %>

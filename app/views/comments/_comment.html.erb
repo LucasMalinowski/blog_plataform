@@ -4,7 +4,8 @@
   </div>
   <div id="comment_<%=comment.id%>_info">
     <p class="text-gray-800"><%= comment.body %></p>
-    <p class="text-sm text-gray-500">By <%= comment.user.email %></p>
+    <p class="text-sm text-gray-500">By <%= comment.user.name %></p>
+    <p class="text-gray-500 text-xs mt-2">Posted <%= comment.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
   </div>
   <% if current_user == comment.user %>
     <div class="flex justify-between items-center mt-4">

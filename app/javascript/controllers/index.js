@@ -7,8 +7,12 @@ import { application } from "./application"
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
+import GalleryController from "./gallery_controller"
+application.register("gallery", GalleryController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
 import PostsController from "./posts_controller"
 application.register("posts", PostsController)
+

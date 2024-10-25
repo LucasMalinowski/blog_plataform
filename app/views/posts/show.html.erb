@@ -1,0 +1,38 @@
+
+<div class="container mx-auto px-4 py-8" data-controller="posts">
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <h1 class="text-3xl font-bold mb-2"><%= @post.title %></h1>
+    <p class="text-gray-500 text-sm mb-4">By <%= @post.user.name %> | Posted <%= @post.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p class="text-gray-600"><%= @post.body %></p>
+
+    <% if current_user == @post.user %>
+      <div class="flex justify-between items-center mt-4">
+        <div class="flex space-x-4">
+          <%= link_to 'Edit', edit_post_path(@post), data: { turbo_stream: true, turbo_frame: "edit_post" }, class: "text-green-500 hover:underline" %>
+          <%= button_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:underline" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Comments Section -->
+  <div data-controller="comments" class="mt-6">
+    <h2 class="text-2xl font-bold mb-4">Comments (<%= @post.comments.count %>)</h2>
+
+    <div data-comments-target="commentsList" class="mt-4">
+      <% if @post.comments.any? %>
+        <% @post.comments.each do |comment| %>
+          <%= render partial: "comments/comment", locals: { post: @post, comment: comment } %>
+        <% end %>
+      <% else %>
+        <p class="text-gray-500">No comments yet.</p>
+      <% end %>
+    </div>
+
+    <!-- Add Comment Form -->
+    <div data-comments-target="commentForm" class="mt-6">
+      <h3 class="text-lg font-semibold mb-2">Add a Comment</h3>
+      <%= render "comments/form", post: @post %>
+    </div>
+  </div>
+</div>
