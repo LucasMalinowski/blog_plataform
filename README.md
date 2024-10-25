@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Challenge: Building a Mini Blogging Platform
 
-Things you may want to cover:
+### Description
 
-* Ruby version
+This is a mini blogging platform that allows users to create, read, update and delete posts. The platform is built using Ruby on Rails and PostgreSQL.
 
-* System dependencies
+The platform has the following features:
 
-* Configuration
+1. User Authentication (Devise)
+2. Post & Comment CRUD's
+3. API Endpoints
+   - /api/v1/posts
+4. Search with pg_search on Posts title, body and User name
+5. Background Job for Sending Notifications once a Post gets a Comment (sidekiq),
+6. Dockerized with Docker Compose
+7. Deployable to Heroku
+8. Tests with RSpec
+9. Cache with Redis
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Hey team of Bookkeeper360, I hope you enjoy the platform! 🚀
+I did my best to deliver a clean and well-structured codebase that fullfills the requirements of the challenge.
+Really looking forward to hearing your feedback!
+Even if I'm not selected, I would love to hear your thoughts on the project.
