@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def index
     @posts = if params[:query].present?
                Post.includes(:comments, :user)
-                   .search_by_title_and_body_and_user_name(sanitize_sql(params[:query]))
+                   .search_by_title_and_body_and_user_name(params[:query])
                    .page(params[:page]).per(5)
              else
                Post.includes(:comments, :user)

@@ -27,16 +27,21 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       respond_to do |format|
-        format.html { redirect_to @comment, notice: 'Post was successfully updated.' }
+        format.html { redirect_to posts_path, notice: 'Comment was successfully updated.' }
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace(@comment, partial: "comments/comment", locals: { post: @comment.post, comment: @comment })]
+            turbo_stream.replace(@comment, partial: "comments/comment", locals: { post: @comment.post, comment: @comment })
+          ]
         end
       end
     else
       respond_to do |format|
         format.html { render :edit, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_comment", partial: "comments/form", locals: { comment: @comment }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("edit_comment_#{@comment.id}", partial: "comments/form", locals: { post: @comment.post, comment: @comment })
+          ]
+        end
       end
     end
   end
